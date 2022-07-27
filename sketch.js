@@ -32,7 +32,7 @@ function draw() {
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+    //resizeCanvas(windowWidth, windowHeight);
 }
 
 function mouseDragged() {
@@ -42,3 +42,17 @@ function mouseDragged() {
 function mouseReleased() {
     mouseHandler.handleMouseReleased(mouseX, mouseY);
 }
+
+function onAddImageButtonClick(e) {
+    const input = document.getElementById('image-input');
+    //console.log(input.value);
+    loadImage(input.value, img => tierList.addItemWithImage(img));
+    input.value = '';
+}
+
+function onDownloadButtonClick(e) {
+    saveCanvas('tier-list');
+}
+
+document.getElementById('download-button').addEventListener('click', onDownloadButtonClick);
+document.getElementById('add-image-button').addEventListener('click', onAddImageButtonClick);
