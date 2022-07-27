@@ -7,8 +7,10 @@ function preload() {
     arial = loadFont('assets/arial.ttf');
 }
 
+const buffer = 100;//30;
+
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth - buffer, windowHeight);
     textFont(arial, 28);
 
     tierList = new TierList(TIER_MARGIN, TIER_MARGIN, width - 2*TIER_MARGIN, height - 2*TIER_MARGIN);
@@ -20,6 +22,9 @@ function setup() {
 
 function draw() {
     mouseHandler.handleMouseMoved(mouseX, mouseY);
+
+    const newHeight = tierList.height + 2*TIER_MARGIN;
+    if (newHeight !== height) resizeCanvas(width, newHeight);
 
     background(200);
     tierList.draw();

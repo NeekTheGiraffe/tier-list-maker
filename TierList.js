@@ -9,8 +9,6 @@ class TierList {
         const baseBucketY = this.#createDefaultTiers();
 
         this.baseBucket = new Tier(x, baseBucketY, width, TIER_ITEM_SIZE);
-        
-        //console.log(this.tiers);
     }
 
     get mayShrink() { return this.baseBucket.mayShrink; }
