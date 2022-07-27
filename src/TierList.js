@@ -1,9 +1,8 @@
 class TierList {
-    constructor(x, y, width, height) {
+    constructor(x, y, width) {
         this.x = x;
         this.y = y;
         this.width = width;
-        this.height = height;
         this.tiers = [];
 
         const baseBucketY = this.#createDefaultTiers();
@@ -21,6 +20,9 @@ class TierList {
         if (this.baseBucket.setShrink(value)) changedHeight = true;
         if (changedHeight) this.#adjustPositions();
         return changedHeight;
+    }
+    get height() {
+        return this.tiers.reduce((acc, tier) => acc + tier.height + TIER_MARGIN, 2*TIER_MARGIN) + this.baseBucket.height;
     }
     /**
      * 

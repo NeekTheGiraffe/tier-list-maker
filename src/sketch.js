@@ -13,7 +13,7 @@ function setup() {
     createCanvas(windowWidth - buffer, windowHeight).parent("sketch-holder");
     textFont(arial, 28);
 
-    tierList = new TierList(TIER_MARGIN, TIER_MARGIN, width - 2*TIER_MARGIN, height - 2*TIER_MARGIN);
+    tierList = new TierList(TIER_MARGIN, TIER_MARGIN, width - 2*TIER_MARGIN);
     mouseHandler = new MouseHandler(tierList);
 
     //const images = ['elephant.png', 'snake.png', 'walrus.png', 'zebra.png'];
