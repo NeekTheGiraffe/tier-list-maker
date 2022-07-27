@@ -249,10 +249,10 @@ class Tier {
             fill(this.color);
             rect(this.#x, this.#y, this.minHeight, this.height);
 
-            textAlign(CENTER, BASELINE);
+            textAlign(CENTER, CENTER);
             fill((red(this.color) + green(this.color) + blue(this.color) > 600) ?
                 TIER_DARK_TEXT_BRIGHTNESS : TIER_LIGHT_TEXT_BRIGHTNESS);
-            text(this.name, this.#x + 0.5*this.minHeight, this.#y + 0.5*this.height + 0.5*textAscent());
+            text(this.name, this.#x + 0.5*this.minHeight, this.#y + 0.5*this.height);
         }
 
         // Draw the items
