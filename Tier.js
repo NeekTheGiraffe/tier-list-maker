@@ -1,4 +1,4 @@
-const TIER_MARGIN = 20;
+const TIER_MARGIN = 10;
 
 const TIER_BACKGROUND_BRIGHTNESS = 70;
 const TIER_OUTLINE_BRIGHTNESS = 0;
@@ -120,7 +120,7 @@ class Tier {
      */
     addItemAtPosition(item, x, y) {
         const index = this.#indexOf(x, y, 1);
-        this.contents = [...this.contents.slice(0, index), item, ...this.contents.slice(index + 1)];
+        this.contents = [...this.contents.slice(0, index + 1), item, ...this.contents.slice(index + 1)];
         
         this.#adjustPositions(index);
 
@@ -210,7 +210,9 @@ class Tier {
      */
     #removeItemAtIndex(index) {
         this.contents.splice(index, 1);
+        //console.log(this.contents);
         this.#adjustPositions(index);
+        //console.log(this.contents);
         if (this.mayShrink && this.size % this.itemsPerRow == 0) {
             return this.#adjustHeight();
         }
@@ -224,7 +226,7 @@ class Tier {
      */
     moveItemWithinBucket(item, x, y) {
         const oldIndex = this.#indexOfItem(item);
-        if (oldIndex === -1 || contents[oldIndex] !== item) {
+        if (oldIndex === -1 || this.contents[oldIndex] !== item) {
             // Item is not in this Tier
             return false;
         }
@@ -271,6 +273,7 @@ class Tier {
         const row = this.#calcFromEquallySpacedGroups(y, this.bucketY, TIER_ITEM_SIZE, numRows);
 
         const index = row * this.itemsPerRow + column;
+        //console.log({ numRows, numColumns, numItems, column, row, index});
         return Math.min(index, numItems - 1);
     }
     /**
@@ -281,7 +284,7 @@ class Tier {
     #indexOfItem(item) {
         const { x, y } = item;
         if (!this.containsPoint(x, y)) return -1;
-        return this.indexOf(x, y);
+        return this.#indexOf(x, y);
     }
     /** Calculates the 'index' of the group that an item belongs to
      * Say there are 4 equally spaced groups along a 1D-axis:
@@ -300,7 +303,7 @@ class Tier {
     }
     /** The y value where an item should be located */
     #yOf(index) {
-        return this.bucketY + TIER_ITEM_SIZE * (index / this.itemsPerRow);
+        return this.bucketY + TIER_ITEM_SIZE * Math.floor(index / this.itemsPerRow);
     }
     /** The number of items that can fit inside 1 row of this tier */
     get itemsPerRow() { return Math.floor(this.bucketWidth / TIER_ITEM_SIZE); }
@@ -309,8 +312,8 @@ class Tier {
      */
     #adjustPositions(firstIndex = 0) {
         this.contents.slice(firstIndex).forEach((item, index) => {
-            item.x = this.#xOf(index);
-            item.y = this.#yOf(index);
+            item.x = this.#xOf(index + firstIndex);
+            item.y = this.#yOf(index + firstIndex);
         });
     }
     /** Adjusts the height to match the number of items in this Tier
@@ -341,9 +344,9 @@ class Tier {
             // i1 < i2
             this.contents = [
                 ...this.contents.slice(0, i1),
-                ...this.contents.slice(i1 + 1, i2),
+                ...this.contents.slice(i1 + 1, i2 + 1),
                 this.contents[i1],
-                ...this.contents.slice(i2)
+                ...this.contents.slice(i2 + 1)
             ];
         }
         this.#adjustPositions();

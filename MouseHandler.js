@@ -16,6 +16,7 @@ class MouseHandler {
             // We're dragging a tier item
             this.dragged.x = x - 0.5*TIER_ITEM_SIZE;
             this.dragged.y = y - 0.5*TIER_ITEM_SIZE;
+            //console.log({ghostDragged: this.ghostDragged, x, y});
             this.tierList.adjustItemPosition(this.ghostDragged, x, y);
             
             return;
@@ -32,7 +33,7 @@ class MouseHandler {
         this.ghostDragged.brightness = GHOST_ITEM_BRIGHTNESS;
         this.ghostDragged.alpha = GHOST_ITEM_ALPHA;
 
-        this.tierList.setItem(x, y, this.ghostDragged);
+        this.tierList.setItemAt(x, y, this.ghostDragged);
         this.tierList.mayShrink = false;
     }
 
@@ -58,6 +59,8 @@ class MouseHandler {
                 this.previous.brightness = DEFAULT_BRIGHTNESS;
             }
         }
+
+        this.previous = current;
     }
 
     draw() {

@@ -1,4 +1,4 @@
-const TIER_ITEM_SIZE = 100;
+const TIER_ITEM_SIZE = 70;
 const TIER_ITEM_DEFAULT_BRIGHTNESS = 255;
 const TIER_ITEM_DEFAULT_ALPHA = 255;
 
@@ -16,7 +16,7 @@ class TierItem {
         this.image = image;
         this.brightness = brightness;
         this.alpha = alpha;
-        this.image.resize(TIER_ITEM_SIZE);
+        this.image.resize(TIER_ITEM_SIZE, TIER_ITEM_SIZE);
     }
 
     containsPoint(x, y) {

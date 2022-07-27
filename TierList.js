@@ -10,7 +10,7 @@ class TierList {
 
         this.baseBucket = new Tier(x, baseBucketY, width, TIER_ITEM_SIZE);
         
-        console.log(this.tiers);
+        //console.log(this.tiers);
     }
 
     get mayShrink() { return this.baseBucket.mayShrink; }
@@ -71,7 +71,7 @@ class TierList {
         if (oldTier !== newTier) {
             let heightChanged = false;
             if (oldTier.removeItem(item)) heightChanged = true;
-            if (newTier.addItemAtPosition(x, y, item)) heightChanged = true;
+            if (newTier.addItemAtPosition(item, x, y)) heightChanged = true;
             if (heightChanged) this.#adjustPositions();
             return;
         }
@@ -95,7 +95,7 @@ class TierList {
 
         let y = this.y;
         tiers.forEach(tier => {
-            this.tiers.push(new Tier(0, 0, this.width, TIER_ITEM_SIZE, tier.name, tier.color));
+            this.tiers.push(new Tier(this.x, y, this.width, TIER_ITEM_SIZE, tier.name, tier.color));
             y += TIER_ITEM_SIZE + TIER_MARGIN;
         });
         return y;
@@ -119,9 +119,5 @@ class TierList {
         if (tier != null) return tier;
         if (this.baseBucket.containsItem(item)) return this.baseBucket;
         return null;
-    }
-
-    #totalNumRows() {
-        return this.tiers.reduce((acc, tier) => acc + tier.numRows, 0) + this.baseBucket.numRows;
     }
 }

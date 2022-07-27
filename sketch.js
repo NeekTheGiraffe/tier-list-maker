@@ -5,15 +5,17 @@ let tierList;
 
 function preload() {
     arial = loadFont('assets/arial.ttf');
-
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    textFont(arial, 36);
+    textFont(arial, 28);
 
     tierList = new TierList(TIER_MARGIN, TIER_MARGIN, width - 2*TIER_MARGIN, height - 2*TIER_MARGIN);
     mouseHandler = new MouseHandler(tierList);
+
+    const images = ['elephant.png', 'snake.png', 'walrus.png', 'zebra.png'];
+    images.forEach(path => loadImage(`assets/${path}`, img => tierList.addItemWithImage(img)));
 }
 
 function draw() {
