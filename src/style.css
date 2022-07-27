@@ -6,6 +6,70 @@
     font-size: 12px;
 }
 
+.control-panel {
+    display: flex;
+    flex-direction: row;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.control-group-title {
+    font-size: 16px;
+    text-align: center;
+}
+
+.control-group-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    background-color: black;
+    opacity: 0.9;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+
+    bottom: 110%;
+    left: 50%;
+}
+
+#url-tooltip {
+    width: 300px;
+    margin-left: -150px;
+}
+#upload-tooltip {
+    width: 200px;
+    margin-left: -100px;
+}
+#download-tooltip {
+    width: 200px;
+    margin-left: -100px;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
+#file-input {
+    margin-left: 10px;
+}
+
 body {
     font-family: 'Arial';
 

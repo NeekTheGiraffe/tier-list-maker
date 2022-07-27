@@ -12,11 +12,45 @@
 <body>
     <h1 class="title">Tier List Maker</h1>
 
-    <div>
-        <input id="image-input"></input>
-        <button id="add-image-button">Add image</button>
+    <div class="control-panel">
 
-        <button id="download-button">Download list</button>
+        <!-- Add items -->
+        <div class="control-group">
+            <h2 class="control-group-title">Add items</h2>
+            <div class="control-group-bar">
+                <!-- Add items by URL -->
+                <span class="tooltip">
+                    <input id="image-input" placeholder="Enter URL(s)..."></input>
+                    <button id="add-image-button">Add image(s)</button>
+
+                    <div class="tooltip-text" id="url-tooltip">
+                        Enter a URL to any image.<br>
+                        You can put multiple URLs if they are comma-separated.
+                    </div>
+                </span>
+
+                <!-- Add items by upload -->
+                <span class="tooltip">
+                    <input id="file-input" type="file" accept="image/*" multiple>
+                    <div class="tooltip-text" id="upload-tooltip">
+                        Upload images from your computer.
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <!-- Download resources -->
+        <div class="control-group">
+            <h2 class="control-group-title">Save</h2>
+
+            <div class="control-group-bar tooltip">
+                <button id="download-button">Download tier list</button>
+                <div class="tooltip-text" id="download-tooltip">
+                    Download a .png image of this tier list.
+                </div>
+            </div>
+        </div>
+        
     </div>
     <div id="sketch-holder"></div>
 
